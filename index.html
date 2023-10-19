@@ -12,9 +12,9 @@
 
 </head>
 <body>
-    <div>
+    <div name="Login-Screen">
         <h1 class="bg-primary">BoeBerBra</h1>
-        <form>
+        <form action="post">
             <h3>Sign in</h3>
 
             <label for="username">Username</label>
@@ -36,14 +36,84 @@
         </form>
     </div>
 
-    <div id="map" style="height: 600px;"></div>
-    <script>
-        var map = L.map('map').setView([52.51999807860289, 13.404877357255282], 13);
-    
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-    </script>
+    <div name="Main-Screen">
+        <p>Welcome</p> <p id="username"></p>
+        <button>Logout</button>
 
+        <ul>
+            <li>Hochschule für Technik und Wirtschaft 52.4565244605679, 13.525579538275405</li>
+            <li>Berlin Hauptbahnhof 52.525126329213364, 13.369434186427032</li>
+            <li>Reichstagsgebäude 52.51869218853665, 13.376147888081254</li>
+        </ul>
+
+        <div id="map" style="height: 600px;"></div>
+        <script>
+            var map = L.map('map').setView([52.51999807860289, 13.404877357255282], 13);
+        
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            var marker1 = L.marker([52.51999807860289, 13.404877357255282]).addTo(map);
+            marker1.bindPopup("Das Bährlien")
+
+            var marker2 = L.marker([52.4565244605679, 13.525579538275405]).addTo(map);
+            marker2.bindPopup("Das HTW")
+        </script>
+
+        <button>Add</button>
+
+        <div>
+            <a href="https://www.htw-berlin.de/datenschutz/">Datenschutzerklärung</a>
+            <a href="https://www.htw-berlin.de/impressum/">Impressum</a>
+        </div>
+    </div>
+
+    <div name="Add-Screen">
+        <form action="post">
+            <h3>New Location</h3>
+
+            <label for="locationName">Name</label>
+            <input type="text">
+            <label for="locationAdress">Address</label>
+            <input type="text" autocomplete="street-address">
+            <label for="severityLevel">Severity Level</label>
+            <div id="severityLevel">
+                <label for="severityLvl1"></label>
+                <input type="radio" id="severityLvl1" name="severity">
+                <label for="severityLvl2"></label>
+                <input type="radio" id="severityLvl2" name="severity">
+                <label for="severityLvl3"></label>
+                <input type="radio" id="severityLvl3" name="severity">
+            </div>
+
+            <button>Save/Submit</button>
+            <button>Cancel</button>
+        </form>
+    </div>
+    
+    <div name="Update/Delete-Screen">
+        <form action="post">
+            <h3>Update/Delete Location</h3>
+
+            <label for="locationName">Name</label>
+            <input type="text" value="Reichstagsgebäude">
+            <label for="locationAdress">Address</label>
+            <input type="text" autocomplete="street-address" value="Platz der Republik 1">
+            <label for="severityLevel">Severity Level</label>
+            <div id="severityLevel">
+                <label for="severityLvl1"></label>
+                <input type="radio" id="severityLvl1" name="severity" checked>
+                <label for="severityLvl2"></label>
+                <input type="radio" id="severityLvl2" name="severity">
+                <label for="severityLvl3"></label>
+                <input type="radio" id="severityLvl3" name="severity">
+            </div>
+
+            <button>Update</button>
+            <button>Delete</button>
+            <button>Cancel</button>
+        </form>
+    </div>
 </body>
 </html>
