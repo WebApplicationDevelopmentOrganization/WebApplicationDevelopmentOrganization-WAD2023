@@ -85,27 +85,44 @@
         </div>
     </div>
 
-    <div id="Add-Screen">
-        <form action="post">
-            <h3>New Location</h3>
-
-            <label for="locationName">Name</label>
-            <input type="text">
-            <label for="locationAdress">Address</label>
-            <input type="text" autocomplete="street-address">
-            <label for="severityLevel">Severity Level</label>
-            <div id="severityLevel">
-                <label for="severityLvl1"></label>
-                <input type="radio" id="severityLvl1" name="severity">
-                <label for="severityLvl2"></label>
-                <input type="radio" id="severityLvl2" name="severity">
-                <label for="severityLvl3"></label>
-                <input type="radio" id="severityLvl3" name="severity">
-            </div>
-
-            <button>Save/Submit</button>
-            <button>Cancel</button>
-        </form>
+    <div id="Add-Screen" class="rounded-lg ring-1 ring-slate-900/5 shadow-xl bg-slate-800 w-full h-screen flex justify-center py-10 items-center">
+        <div class="w-fit flex justify-center h-fit">
+            <form action="post" class="bg-white rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl px-8 pt-6 pb-8 mb-4">
+                <h3 class="mb-4 text-2xl">New Location</h3>
+    
+                <label for="locationName">Name</label>
+                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                <label for="locationAdress">Address</label>
+                <input type="text" autocomplete="street-address" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                <label for="severityLevel">Severity Level</label>
+                <div id="severityLevel" class="flex space-x-4 my-5">
+                    <label for="severityLvl1" class="block relative">
+                      <input type="radio" id="severityLvl1" name="severity" class="hidden" />
+                      <span class="custom-radio bg-yellow-300"></span>
+                    </label>
+                    
+                    <label for="severityLvl2" class="block relative">
+                      <input type="radio" id="severityLvl2" name="severity" class="hidden" />
+                      <span class="custom-radio bg-orange-500"></span>
+                    </label>
+                    
+                    <label for="severityLvl3" class="block relative">
+                      <input type="radio" id="severityLvl3" name="severity" class="hidden" />
+                      <span class="custom-radio bg-red-600"></span>
+                    </label>
+                  </div>
+                                 
+                  
+                <div class="flex justify-between w-full">
+                    <button class="bg-transparent hover:bg-blue-200 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded w-1/2 flex justify-center">
+                        Save
+                        <!-- <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.94,11A8.26,8.26,0,0,1,21,12a9,9,0,1,1-9-9,8.83,8.83,0,0,1,4,1"/></svg> -->
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="items-center fill-current w-4 h-4 mr-2 mt-1 ml-1"><path d="M20.94,11A8.26,8.26,0,0,1,21,12a9,9,0,1,1-9-9,8.83,8.83,0,0,1,4,1" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></path><polyline id="primary-2" data-name="primary" points="21 5 12 14 8 10" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></polyline></svg
+                    </button>
+                    <button class="w-1/2 flex justify-center">Cancel</button>
+                </div>
+            </form>
+        </div>
     </div>
     
     <div id="Update/Delete-Screen">
@@ -131,5 +148,24 @@
             <button>Cancel</button>
         </form>
     </div>
+    <style>
+        .custom-radio {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            border-radius: 8px; /* Less rounded corners */
+            cursor: pointer;
+        }
+        
+        /* Style the checked state */
+        input[type="radio"]:checked + .custom-radio {
+            border: 2px solid black; /* Black border when checked */
+        
+            
+            background-size: 50% 50%;
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+        }
+      </style>
 </body>
 </html>
