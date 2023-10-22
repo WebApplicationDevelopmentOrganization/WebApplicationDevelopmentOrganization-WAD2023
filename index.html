@@ -12,41 +12,45 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
 </head>
-<body class="g-white bg-slate-400 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl text-sky-400">
-    <div id="Login-Screen">
-        <h1 class="bg-primary">BoeBerBra</h1>
-        <form action="post">
-            <h3>Sign in</h3>
-
-            <label for="username">Username</label>
-            <input 
-                type="text" 
-                required
-                maxlength="16"
-            />
-
-            <label for="password">Password</label>
-            <input
-                type="password"
-                required
-                maxlength="16"
-                autocomplete="current-password"
-            />
-            
-            <button type="submit">Login</button>
-        </form>
+<body class="g-white bg-slate-400 rounded-lg px-6 py-6 ring-1 ring-slate-900/5 shadow-xl text-sky-400">
+    <div id="Login-Screen" class="rounded-lg ring-1 ring-slate-900/5 shadow-xl bg-slate-800 w-full h-screen flex justify-between py-10 items-center">
+        <div class="w-1/2 flex justify-center h-fit">
+            <form action="post" class="bg-white rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl px-8 pt-6 pb-8 mb-4">
+                <h3 class="mb-4 text-2xl">Sign in</h3>
+    
+                <label for="username">Username</label>
+                <input 
+                    type="text" 
+                    required
+                    maxlength="16"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5"
+                />
+    
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    required
+                    maxlength="16"
+                    autocomplete="current-password"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 my-5 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
+                
+                <button type="submit" class="bg-transparent hover:bg-blue-200 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded">Login</button>
+            </form>
+        </div>
+        <h1 class="w-1/2 flex justify-center text-4xl">BoeBerBra</h1>
     </div>
 
     <div id="Main-Screen" class="rounded-lg ring-1 ring-slate-900/5 shadow-xl bg-slate-800">
 
         <div class="flex justify-between w-full py-8 px-8">
-            <div class="flex justify-between py-5 mx-16 font-semibold text-2xl">
+            <div class="flex justify-between  mb-18 font-semibold text-2xl">
                 <p>Welcome </p> <p id="username" class="px-2"></p>
             </div>
             <button class="bg-transparent hover:text-sky-300 font-semibold hover:text-white px-2">Logout</button>
         </div>
         
-        <div class="grid grid-cols-12 py-5 px-10 my-5">
+        <div class="grid grid-cols-12 py-5 px-10 my-5 items-center">
             <ul class="col-span-2 p-4 overflow-y-auto grid grid-cols-1 gap-5 content-center bg-slate-700 rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl h-fit">
               <li>Hochschule für Technik und Wirtschaft: <br> 52.4565244605679, 13.525579538275405</li>
               <li>Berlin Hauptbahnhof: <br> 52.525126329213364, 13.369434186427032</li>
@@ -54,7 +58,7 @@
             </ul>
           
             <div id="map" class="col-span-10 rounded-lg ring-1 ring-slate-900/5" style="height: 700px;"></div>
-          </div>
+        </div>
           
         <script>
 
