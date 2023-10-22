@@ -12,7 +12,7 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
 </head>
-<body class="g-white bg-slate-400 rounded-lg px-6 py-6 ring-1 ring-slate-900/5 shadow-xl text-sky-400">
+<body class="g-white bg-slate-700 rounded-lg px-6 py-6 ring-1 ring-slate-900/5 shadow-xl text-sky-400">
     <div id="Login-Screen" class="rounded-lg ring-1 ring-slate-900/5 shadow-xl bg-slate-800 w-full h-screen flex justify-between py-10 items-center">
         <div class="w-1/2 flex justify-center h-fit">
             <form action="post" class="bg-white rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl px-8 pt-6 pb-8 mb-4">
@@ -110,13 +110,12 @@
                       <input type="radio" id="severityLvl3" name="severity" class="hidden" />
                       <span class="custom-radio bg-red-600"></span>
                     </label>
-                  </div>
+                </div>
                                  
                   
                 <div class="flex justify-between w-full">
                     <button class="bg-transparent hover:bg-blue-200 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded w-1/2 flex justify-center">
                         Save
-                        <!-- <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.94,11A8.26,8.26,0,0,1,21,12a9,9,0,1,1-9-9,8.83,8.83,0,0,1,4,1"/></svg> -->
                         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="items-center fill-current w-4 h-4 mr-2 mt-1 ml-1"><path d="M20.94,11A8.26,8.26,0,0,1,21,12a9,9,0,1,1-9-9,8.83,8.83,0,0,1,4,1" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></path><polyline id="primary-2" data-name="primary" points="21 5 12 14 8 10" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></polyline></svg
                     </button>
                     <button class="w-1/2 flex justify-center">Cancel</button>
@@ -125,29 +124,41 @@
         </div>
     </div>
     
-    <div id="Update/Delete-Screen">
-        <form action="post">
-            <h3>Update/Delete Location</h3>
-
-            <label for="locationName">Name</label>
-            <input type="text" value="Reichstagsgebäude">
-            <label for="locationAdress">Address</label>
-            <input type="text" autocomplete="street-address" value="Platz der Republik 1">
-            <label for="severityLevel">Severity Level</label>
-            <div id="severityLevel">
-                <label for="severityLvl1"></label>
-                <input type="radio" id="severityLvl1" name="severity" checked>
-                <label for="severityLvl2"></label>
-                <input type="radio" id="severityLvl2" name="severity">
-                <label for="severityLvl3"></label>
-                <input type="radio" id="severityLvl3" name="severity">
-            </div>
-
-            <button>Update</button>
-            <button>Delete</button>
-            <button>Cancel</button>
-        </form>
+    <div id="Update/Delete-Screen" class="rounded-lg ring-1 ring-slate-900/5 shadow-xl bg-slate-800 w-full h-screen flex justify-center py-10 items-center">
+        <div class="w-fit flex justify-center h-fit">
+            <form action="post" class="bg-white rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl px-8 pt-6 pb-8 mb-4">
+                <h3 class="mb-4 text-2xl">Update/Delete Location</h3>
+    
+                <label for="locationName">Name</label>
+                <input type="text" value="Reichstagsgebäude" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                <label for="locationAdress">Address</label>
+                <input type="text" autocomplete="street-address" value="Platz der Republik 1" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                <label for="severityLevel">Severity Level</label>
+                <div id="severityLevel-delete" class="flex space-x-4 my-5">
+                    <label for="severityLvl1-delete" class="block relative">
+                      <input type="radio" id="severityLvl1-delete" name="severity" class="hidden" />
+                      <span class="custom-radio bg-yellow-300"></span>
+                    </label>
+                    
+                    <label for="severityLvl2-delete" class="block relative">
+                      <input type="radio" id="severityLvl2-delete" name="severity" class="hidden" />
+                      <span class="custom-radio bg-orange-500"></span>
+                    </label>
+                    
+                    <label for="severityLvl3-delete" class="block relative">
+                      <input type="radio" id="severityLvl3-delete" name="severity" class="hidden" />
+                      <span class="custom-radio bg-red-600"></span>
+                    </label>
+                </div>
+                <div class="flex justify-between w-full">
+                    <button class="bg-transparent hover:bg-blue-200 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded w-1/4 flex justify-center">Update</button>
+                    <button class="bg-transparent hover:bg-red-400 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded w-1/4 flex justify-center">Delete</button>
+                    <button class="w-1/4 flex justify-center">Cancel</button>
+                </div>
+            </form>
+        </div>
     </div>
+
     <style>
         .custom-radio {
             width: 24px;
