@@ -90,9 +90,48 @@
                 <h3 class="mb-4 text-2xl">New Location</h3>
     
                 <label for="locationName">Name</label>
-                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                <input type="text" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                
+                <label for="descreption">descreption</label>              
+                <input type="text" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                
                 <label for="locationAdress">Address</label>
-                <input type="text" autocomplete="street-address" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                <input type="text" required autocomplete="street-address" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                <div class="flex">
+                    <div class="w-1/2">
+                        <label for="city">City</label>
+                        <input type="text" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">    
+                    </div>
+                    <div class="w-1/2 mx-4">
+                        <label for="locationAdress">ZIP code</label>
+                        <input type="number" required autocomplete="postal-code" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5"> 
+                    </div>
+                </div>
+                <div class="py-2">
+                    <label for="state">State</label>
+                    <div class="w-full px-3">
+                        <div>
+                            <input required type="radio" name="state" id="ber">
+                            <label>Berlin</label>
+                        </div>
+                        <div>
+                            <input required type="radio" name="state" id="ber">
+                            <label>Brandenburg</label>
+                        </div>
+                    </div>                    
+                </div>
+                <label for="cords">Coordinates</label>
+                <div id="cords" class="flex">
+                    <div class="w-1/2">
+                        <label for="Lat">Lat</label>
+                        <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">    
+                    </div>
+                    <div class="w-1/2 mx-4">
+                        <label for="Long">Long</label>
+                        <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5"> 
+                    </div>
+                </div>
+                
                 <label for="severityLevel">Severity Level</label>
                 <div id="severityLevel" class="flex space-x-4 my-5">
                     <label for="severityLvl1" class="block relative">
