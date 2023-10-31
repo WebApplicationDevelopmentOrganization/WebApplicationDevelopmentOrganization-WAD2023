@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <link rel="stylesheet" href="style.css">
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
@@ -92,7 +94,7 @@
                 <label for="locationName">Name</label>
                 <input type="text" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
                 
-                <label for="discription">discription</label>              
+                <label for="discription">Discription</label>              
                 <input type="text" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
                 
                 <label for="locationAdress">Address</label>
@@ -168,23 +170,62 @@
                 <h3 class="mb-4 text-2xl">Update/Delete Location</h3>
     
                 <label for="locationName">Name</label>
-                <input type="text" value="Reichstagsgebäude" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                <input type="text" value="Reichstagsgebäude" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                
+                <label for="discription">Discription</label>              
+                <input type="text" value="Das is ein Haus" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                
                 <label for="locationAdress">Address</label>
-                <input type="text" autocomplete="street-address" value="Platz der Republik 1" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                <input type="text" value="Platz der Republik 1" required autocomplete="street-address" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                <div class="flex">
+                    <div class="w-1/2">
+                        <label for="city">City</label>
+                        <input type="text" disabled required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">    
+                    </div>
+                    <div class="w-1/2 mx-4">
+                        <label for="locationAdress">ZIP code</label>
+                        <input type="number" value="10557" required autocomplete="postal-code" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5"> 
+                    </div>
+                </div>
+                <div class="py-2">
+                    <label for="state">State</label>
+                    <div class="w-full px-3">
+                        <div>
+                            <input checked type="radio" name="state" id="updateBer">
+                            <label for="updateBer">Berlin</label>
+                        </div>
+                        <div>
+                            <input required type="radio" name="state" id="updateBurg">
+                            <label for="updateBurg">Brandenburg</label>
+                        </div>
+                    </div>                    
+                </div>
+                <label for="cords">Coordinates</label>
+                <div id="cords" class="flex">
+                    <div class="w-1/2">
+                        <label for="Lat">Lat</label>
+                        <input type="text" value="52.51869218853665" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">    
+                    </div>
+                    <div class="w-1/2 mx-4">
+                        <label for="Long">Long</label>
+                        <input type="text" value="13.376147888081254" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5"> 
+                    </div>
+                </div>
+                
                 <label for="severityLevel">Severity Level</label>
-                <div id="severityLevel-delete" class="flex space-x-4 my-5">
-                    <label for="severityLvl1-delete" class="block relative">
-                      <input type="radio" id="severityLvl1-delete" name="severity" class="hidden" />
+                <div id="severityLevel" class="flex space-x-4 my-5">
+                    <label for="updateSeverityLvl1" class="block relative">
+                      <input type="radio" id="updateSeverityLvl1" name="severity" class="hidden" />
                       <span class="custom-radio bg-yellow-300"></span>
                     </label>
                     
-                    <label for="severityLvl2-delete" class="block relative">
-                      <input type="radio" id="severityLvl2-delete" name="severity" class="hidden" />
+                    <label for="updateSeverityLvl2" class="block relative">
+                      <input type="radio" id="updateSeverityLvl2" name="severity" class="hidden" />
                       <span class="custom-radio bg-orange-500"></span>
                     </label>
                     
-                    <label for="severityLvl3-delete" class="block relative">
-                      <input type="radio" id="severityLvl3-delete" name="severity" class="hidden" />
+                    <label for="updateSeverityLvl3" class="block relative">
+                      <input type="radio"checked id="updateSeverityLvl3" name="severity" class="hidden" />
                       <span class="custom-radio bg-red-600"></span>
                     </label>
                 </div>
@@ -196,25 +237,5 @@
             </form>
         </div>
     </div>
-
-    <style>
-        .custom-radio {
-            width: 24px;
-            height: 24px;
-            display: inline-block;
-            border-radius: 8px; /* Less rounded corners */
-            cursor: pointer;
-        }
-        
-        /* Style the checked state */
-        input[type="radio"]:checked + .custom-radio {
-            border: 2px solid black; /* Black border when checked */
-        
-            
-            background-size: 50% 50%;
-            background-position: 50% 50%;
-            background-repeat: no-repeat;
-        }
-      </style>
 </body>
 </html>
