@@ -11,5 +11,4 @@ input[type="radio"]:checked + .custom-radio {
     border: 2px solid black; /* Black border when checked */
     background-size: 50% 50%;
     background-position: 50% 50%;
-    background-repeat: no-repeat;
 }
