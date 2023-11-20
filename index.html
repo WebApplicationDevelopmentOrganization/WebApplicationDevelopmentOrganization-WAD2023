@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="hideDivs.js"></script> 
 
     <link rel="stylesheet" href="style.css">
 
@@ -15,54 +16,16 @@
 </head>
 <body class="g-white bg-slate-700 rounded-lg px-6 py-6 ring-1 ring-slate-900/5 shadow-xl text-sky-400">
 
-    <script>
-        function hideVisibleDivs(id) {
-            // Get all elements with the class 'visibleDivClass'
-            const divs = document.querySelectorAll('.visibleDivClass');
-
-            // First, unhide all divs in case they were previously hidden
-            divs.forEach(function(div) {
-                div.style.display = '';
-            });
-
-            // Then, hide all divs except the one with the specified ID
-            divs.forEach(function(div) {
-                if (div.id !== id) {
-                    div.style.display = 'none';
-                }
-            });
-        }
-
-
-        window.addEventListener('load', function() {
-            hideVisibleDivs('Login-Screen'); // Replace 'show' with the ID of the div you want to keep visible
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('Login').addEventListener('click', function(event) {
-                // Prevent the form from submitting
-                event.preventDefault();
-
-                // Call your function with the specific ID you want to keep visible
-                hideVisibleDivs('Main-Screen'); // Replace 'specificId' with the ID you want to keep visible
-            });
-        });
-
-
-
-    </script>
-    
-    
-
     <!--Login screen-->
     <div id="Login-Screen" class="visibleDivClass rounded-lg ring-1 ring-slate-900/5 shadow-xl bg-slate-800 w-full h-screen flex justify-between py-10 items-center">
         <div class="w-1/2 flex justify-center h-fit">
-            <form action="post" class="bg-white rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl px-8 pt-6 pb-8 mb-4">
+            <form id="Login-Form" action="post" class="bg-white rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl px-8 pt-6 pb-8 mb-4">
                 <h3 class="mb-4 text-2xl">Sign in</h3>
     
                 <label for="username">Username</label>
                 <input 
                     type="text" 
+                    id="username"
                     required
                     maxlength="16"
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5"
@@ -71,13 +34,14 @@
                 <label for="password">Password</label>
                 <input
                     type="password"
+                    id="password"
                     required
                     maxlength="16"
                     autocomplete="current-password"
                     class="shadow appearance-none border rounded w-full py-2 px-3 my-5 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
                 
-                <button id="Login"  class="bg-transparent hover:bg-blue-200 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded">Login</button>
+                <button type="submit" id="Login-Button" class="bg-transparent hover:bg-blue-200 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded">Login</button>
             </form>
         </div>
         <h1 class="w-1/2 flex justify-center text-4xl">BoeBerBra</h1>
