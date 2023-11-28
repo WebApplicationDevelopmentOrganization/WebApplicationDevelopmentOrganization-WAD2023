@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="module" src="js/singlePage.js"></script> 
+    <script type="module" src="js/locations.js"></script> 
 
     <link rel="stylesheet" href="css/style.css">
 
@@ -57,10 +58,8 @@
         </div>
         
         <div class="grid grid-cols-12 py-5 px-10 my-5 items-center">
-            <ul class="col-span-2 p-4 overflow-y-auto grid grid-cols-1 gap-5 content-center bg-slate-700 rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl h-fit">
-              <li>Reinhardtstraße: <br> Reinhardtstraße, <br> 10117 Berlin</li>
-              <li>Heizkraftwerk Moabit: <br> Friedrich-Krause-Ufer 10, <br> 13353 Berlin</li>
-              <li>Tesla Gigafactory: <br> Tesla Straße 1, <br> 15537 Grünheide (Mark)</li>
+            <ul id="locations-list" class="col-span-2 p-4 overflow-y-auto grid grid-cols-1 gap-5 content-center bg-slate-700 rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl h-fit">
+                <!-- location  will be loaded here -->
             </ul>
           
             <div id="map" class="col-span-10 rounded-lg ring-1 ring-slate-900/5" style="height: 700px;"></div>

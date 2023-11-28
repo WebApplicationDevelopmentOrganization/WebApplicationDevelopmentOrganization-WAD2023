@@ -1,4 +1,4 @@
-export {locReinhardtstraße, locHKWMoabit, locTeslaGF};
+
 
 const locReinhardtstraße = {
     name: "Reinhardtstraße",
@@ -35,3 +35,16 @@ const locTeslaGF = {
     lon: 13.7875301,
     severity: 3
 }
+
+function addLocationToList(location) {
+    const locationsList = document.getElementById('locations-list');
+    const listItem = document.createElement('li');
+    listItem.innerHTML = `${location.name}: <br> ${location.address}, <br> ${location.zip} ${location.city}`;
+    locationsList.appendChild(listItem);
+}
+
+// a list with all locations
+const locations = [locReinhardtstraße, locHKWMoabit, locTeslaGF];
+
+export { locations, addLocationToList };
+
