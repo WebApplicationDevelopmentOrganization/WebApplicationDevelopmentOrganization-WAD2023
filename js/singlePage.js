@@ -2,6 +2,11 @@ import getUserByName from "./users.js";
 import { ROLE_ADMIN, ROLE_NORMAL } from "./users.js";
 import {locations, addLocationToList } from "./locations.js";
 
+const LOGIN_SCREEN = "Login-Screen";
+const MAIN_SCREEN = "Main-Screen";
+const ADD_SCREEN = "Add-Screen";
+const UPDATE_DELETE_SCREEN = "Update/Delete-Screen";
+
 let activeUser = null;
 let isUserLoggedIn = false;
 
@@ -21,17 +26,17 @@ function hideAllDivsAndShow(id) {
 
 function pageSetUp(id) {
     switch (id) {
-        case "Login-Screen":
+        case LOGIN_SCREEN:
             return;
 
-        case "Main-Screen":
+        case MAIN_SCREEN:
             setUpMainPage();
             return;
 
-        case "Add-Screen":
+        case ADD_SCREEN:
             return;
 
-        case "Update/Delete-Screen":
+        case UPDATE_DELETE_SCREEN:
             return;
 
         default:
@@ -53,7 +58,7 @@ function setUpMainPage() {
 }
 
 window.addEventListener('load', function() {
-    hideAllDivsAndShow('Login-Screen');
+    hideAllDivsAndShow(LOGIN_SCREEN);
 });
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -80,27 +85,9 @@ function initMap() {
 }
 
 function addLocationToMap(location) {
-    if (location.lat === "" || location.lon === "") {
-        // add location to map by adress
-        let url = `https://nominatim.openstreetmap.org/search?format=json&q=${location.address}, ${location.zip} ${location.city}, ${location.state}`;
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                if (data[0].lat === undefined) {
-
-                    return;
-                }
-
-                location.lat = data[0].lat;
-                location.lon = data[0].lon;
-                let marker = L.marker([location.lat, location.lon]).addTo(map);
-                marker.bindPopup(location.name)
-            });
-    }
-    else {
-        let marker = L.marker([location.lat, location.lon]).addTo(map);
-        marker.bindPopup(location.name)
-    }
+    let marker = L.marker([location.lat, location.lon]).addTo(map);
+    marker.bindPopup(location.name)
+    map.setView([location.lat, location.lon]);
 }
 
 function checkLogin(e) {
@@ -128,22 +115,22 @@ function checkLogin(e) {
     activeUser = user;
     isUserLoggedIn = true;
 
-    hideAllDivsAndShow("Main-Screen");
+    hideAllDivsAndShow(MAIN_SCREEN);
 }
 
 function logout() {
     activeUser = null;
     isUserLoggedIn = false;
 
-    hideAllDivsAndShow("Login-Screen");
+    hideAllDivsAndShow(LOGIN_SCREEN);
 }
 
 function addBtnClicked() {
-    hideAllDivsAndShow("Add-Screen");
+    hideAllDivsAndShow(ADD_SCREEN);
 }
 
 function cancelBtnClicked() {
-    hideAllDivsAndShow("Main-Screen");
+    hideAllDivsAndShow(MAIN_SCREEN);
 }
 
 function saveBtnClicked(e) {
@@ -170,7 +157,6 @@ function saveBtnClicked(e) {
             .then(response => response.json())
             .then(data => {
                 if (data.length === 0) {
-                    alert("Invalid adress.");
                     addressUnavailable = true;
                     return;
                 }
@@ -180,6 +166,7 @@ function saveBtnClicked(e) {
             });
 
         if (addressUnavailable) {
+            alert("Invalid adress.");
             return;
         }
     }
@@ -187,7 +174,7 @@ function saveBtnClicked(e) {
     addLocationToList(newLocation);
     addLocationToMap(newLocation);
 
-    hideAllDivsAndShow("Main-Screen");
+    hideAllDivsAndShow(MAIN_SCREEN);
 }
 
 function getStateFromRadioBtn() {
