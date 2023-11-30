@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="js/singlePage.js"></script> 
+    <script type="module" src="js/locations.js"></script> 
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
@@ -14,15 +16,17 @@
 
 </head>
 <body class="g-white bg-slate-700 rounded-lg px-6 py-6 ring-1 ring-slate-900/5 shadow-xl text-sky-400">
+
     <!--Login screen-->
-    <div id="Login-Screen" class="rounded-lg ring-1 ring-slate-900/5 shadow-xl bg-slate-800 w-full h-screen flex justify-between py-10 items-center">
+    <div id="Login-Screen" class="visibleDivClass rounded-lg ring-1 ring-slate-900/5 shadow-xl bg-slate-800 w-full h-screen flex justify-between py-10 items-center">
         <div class="w-1/2 flex justify-center h-fit">
-            <form action="post" class="bg-white rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl px-8 pt-6 pb-8 mb-4">
+            <form id="Login-Form" action="post" class="bg-white rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl px-8 pt-6 pb-8 mb-4">
                 <h3 class="mb-4 text-2xl">Sign in</h3>
     
                 <label for="username">Username</label>
                 <input 
                     type="text" 
+                    id="username"
                     required
                     maxlength="16"
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5"
@@ -31,20 +35,21 @@
                 <label for="password">Password</label>
                 <input
                     type="password"
+                    id="password"
                     required
                     maxlength="16"
                     autocomplete="current-password"
                     class="shadow appearance-none border rounded w-full py-2 px-3 my-5 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
                 
-                <button type="submit" class="bg-transparent hover:bg-blue-200 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded">Login</button>
+                <button type="submit" id="Login-Button" class="bg-transparent hover:bg-blue-200 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded">Login</button>
             </form>
         </div>
         <h1 class="w-1/2 flex justify-center text-4xl">BoeBerBra</h1>
     </div>
 
     <!--Main screen with map-->
-    <div id="Main-Screen" class="rounded-lg ring-1 ring-slate-900/5 shadow-xl bg-slate-800">
+    <div id="Main-Screen" class="visibleDivClass rounded-lg ring-1 ring-slate-900/5 shadow-xl bg-slate-800">
         <div class="flex justify-between w-full py-8 px-8">
             <div class="flex justify-between  mb-18 font-semibold text-2xl">
                 <p>Welcome </p> <p id="username" class="px-2"></p>
@@ -53,31 +58,12 @@
         </div>
         
         <div class="grid grid-cols-12 py-5 px-10 my-5 items-center">
-            <ul class="col-span-2 p-4 overflow-y-auto grid grid-cols-1 gap-5 content-center bg-slate-700 rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl h-fit">
-              <li>Reinhardtstraße: <br> Reinhardtstraße, <br> 10117 Berlin</li>
-              <li>Heizkraftwerk Moabit: <br> Friedrich-Krause-Ufer 10, <br> 13353 Berlin</li>
-              <li>Tesla Gigafactory: <br> Tesla Straße 1, <br> 15537 Grünheide (Mark)</li>
+            <ul id="locations-list" class="col-span-2 p-4 overflow-y-auto grid grid-cols-1 gap-5 content-center bg-slate-700 rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl h-fit">
+                <!-- location  will be loaded here -->
             </ul>
           
             <div id="map" class="col-span-10 rounded-lg ring-1 ring-slate-900/5" style="height: 700px;"></div>
         </div>
-          
-        <script>
-            var map = L.map('map').setView([52.51999807860289, 13.404877357255282], 12.25);
-
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
-
-            var marker1 = L.marker([52.522158, 13.376946]).addTo(map);
-            marker1.bindPopup("Reinhardtstraße")
-
-            var marker2 = L.marker([52.5380092,13.3445253]).addTo(map);
-            marker2.bindPopup("Heizkraftwerk Moabit")
-
-            var marker3 = L.marker([52.3932851,13.7875301]).addTo(map);
-            marker3.bindPopup("Tesla Gigafactory")
-        </script>
 
         <div class="w-full flex justify-end px-10 my-5">
             <button class="bg-blue-600 py-2.5 rounded-lg hover:bg-blue-500 transition duration-100 font-semibold text-lg w-2/12">Add</button>
@@ -91,7 +77,7 @@
     </div>
 
     <!--Add location screen-->
-    <div id="Add-Screen" class="rounded-lg ring-1 ring-slate-900/5 shadow-xl bg-slate-800 w-full h-screen flex justify-center py-10 items-center">
+    <div id="Add-Screen" class="visibleDivClass rounded-lg ring-1 ring-slate-900/5 shadow-xl bg-slate-800 w-full h-screen flex justify-center py-10 items-center">
         <div class="w-fit flex justify-center h-fit">
             <form action="post" class="bg-white rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl px-8 pt-6 pb-8 mb-4">
                 <h3 class="mb-4 text-2xl">New Location</h3>
@@ -170,7 +156,7 @@
     </div>
     
     <!--Update/Selete screen-->
-    <div id="Update/Delete-Screen" class="rounded-lg ring-1 ring-slate-900/5 shadow-xl bg-slate-800 w-full h-screen flex justify-center py-10 items-center">
+    <div id="Update/Delete-Screen" class=" visibleDivClass rounded-lg ring-1 ring-slate-900/5 shadow-xl bg-slate-800 w-full h-screen flex justify-center py-10 items-center">
         <div class="w-fit flex justify-center h-fit">
             <form action="post" class="bg-white rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl px-8 pt-6 pb-8 mb-4">
                 <h3 class="mb-4 text-2xl">Update/Delete Location</h3>
