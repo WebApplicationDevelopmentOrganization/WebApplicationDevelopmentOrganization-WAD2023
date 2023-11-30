@@ -1,4 +1,8 @@
 export default getUserByName;
+export { ROLE_ADMIN, ROLE_NORMAL };
+
+const ROLE_ADMIN = "admin";
+const ROLE_NORMAL = "non-admin";
 
 function getUserByName(username) {
     const userRoles = new Map([
@@ -16,11 +20,11 @@ function getUserByName(username) {
 const admina = {
     username: "admina",
     password: "password",
-    role:"admin"
+    role:ROLE_ADMIN
 };
 
 const normalo = {
     username: "normalo",
     password: "password",
-    role:"non-admin"
+    role:ROLE_NORMAL
 };

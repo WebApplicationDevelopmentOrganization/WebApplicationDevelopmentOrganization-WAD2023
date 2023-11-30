@@ -1,4 +1,16 @@
+export { locations, addLocationToList };
 
+const templateLocation = {
+    name: null,
+    desc: null,
+    address: null,
+    city: null,
+    zip: null,
+    state: null,
+    lat: 0.0,
+    lon: 0.0,
+    severity: 0
+}
 
 const locReinhardtstraße = {
     name: "Reinhardtstraße",
@@ -45,6 +57,3 @@ function addLocationToList(location) {
 
 // a list with all locations
 const locations = [locReinhardtstraße, locHKWMoabit, locTeslaGF];
-
-export { locations, addLocationToList };
-

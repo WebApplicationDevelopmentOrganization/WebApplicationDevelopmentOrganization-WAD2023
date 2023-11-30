@@ -52,9 +52,9 @@
     <div id="Main-Screen" class="visibleDivClass rounded-lg ring-1 ring-slate-900/5 shadow-xl bg-slate-800">
         <div class="flex justify-between w-full py-8 px-8">
             <div class="flex justify-between  mb-18 font-semibold text-2xl">
-                <p>Welcome </p> <p id="username" class="px-2"></p>
+                <p>Welcome </p> <p id="usernameWelcomeMessage" class="px-2"></p>
             </div>
-            <button class="bg-transparent hover:text-sky-300 font-semibold hover:text-white px-2">Logout</button>
+            <button id="logoutBtn" class="bg-transparent hover:text-sky-300 font-semibold hover:text-white px-2">Logout</button>
         </div>
         
         <div class="grid grid-cols-12 py-5 px-10 my-5 items-center">
@@ -66,7 +66,7 @@
         </div>
 
         <div class="w-full flex justify-end px-10 my-5">
-            <button class="bg-blue-600 py-2.5 rounded-lg hover:bg-blue-500 transition duration-100 font-semibold text-lg w-2/12">Add</button>
+            <button id="addBtn" class="bg-blue-600 py-2.5 rounded-lg hover:bg-blue-500 transition duration-100 font-semibold text-lg w-2/12">Add</button>
         </div>
     </div>
 
@@ -77,32 +77,32 @@
                 <h3 class="mb-4 text-2xl">New Location</h3>
     
                 <label for="locationName">Name</label>
-                <input type="text" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                <input id="locationName" type="text" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
                 
-                <label for="discription">Discription</label>              
-                <input type="text" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                <label for="description">Description</label>              
+                <input id="description" type="text" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
                 
                 <label for="locationAdress">Address</label>
-                <input type="text" required autocomplete="street-address" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                <input id="locationAdress" type="text" required autocomplete="street-address" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
                 <div class="flex">
                     <div class="w-1/2">
                         <label for="city">City</label>
-                        <input type="text" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">    
+                        <input id="city" type="text" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">    
                     </div>
                     <div class="w-1/2 mx-4">
-                        <label for="locationAdress">ZIP code</label>
-                        <input type="number" required autocomplete="postal-code" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5"> 
+                        <label for="zipCode">ZIP code</label>
+                        <input id="zipCode" type="number" required autocomplete="postal-code" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5"> 
                     </div>
                 </div>
                 <div class="py-2">
                     <label for="state">State</label>
                     <div class="w-full px-3">
                         <div>
-                            <input required type="radio" name="state" id="ber">
+                            <input id="ber" required type="radio" name="state">
                             <label for="ber">Berlin</label>
                         </div>
                         <div>
-                            <input required type="radio" name="state" id="burg">
+                            <input id="burg" required type="radio" name="state">
                             <label for="burg">Brandenburg</label>
                         </div>
                     </div>                    
@@ -110,40 +110,40 @@
                 <label for="cords">Coordinates</label>
                 <div id="cords" class="flex">
                     <div class="w-1/2">
-                        <label for="Lat">Lat</label>
-                        <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">    
+                        <label for="lat">Lat</label>
+                        <input id="lat" type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">    
                     </div>
                     <div class="w-1/2 mx-4">
-                        <label for="Long">Long</label>
-                        <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5"> 
+                        <label for="lon">Lon</label>
+                        <input id="lon" type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5"> 
                     </div>
                 </div>
                 
                 <label for="severityLevel">Severity Level</label>
                 <div id="severityLevel" class="flex space-x-4 my-5">
                     <label for="severityLvl1" class="block relative">
-                        <input type="radio" id="severityLvl1" name="severity" class="hidden" />
+                        <input id="severityLvl1" type="radio" name="severity" class="hidden" />
                         <span class="custom-radio bg-yellow-300"></span>
                     </label>
                     
                     <label for="severityLvl2" class="block relative">
-                        <input type="radio" id="severityLvl2" name="severity" class="hidden" />
+                        <input id="severityLvl2" type="radio" name="severity" class="hidden" />
                         <span class="custom-radio bg-orange-500"></span>
                     </label>
                     
                     <label for="severityLvl3" class="block relative">
-                        <input type="radio" id="severityLvl3" name="severity" class="hidden" />
+                        <input id="severityLvl3" type="radio" name="severity" class="hidden" />
                         <span class="custom-radio bg-red-600"></span>
                     </label>
                 </div>
                                  
                   
                 <div class="flex justify-between w-full">
-                    <button class="bg-transparent hover:bg-blue-200 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded w-1/2 flex justify-center">
+                    <button id="saveBtn" class="bg-transparent hover:bg-blue-200 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded w-1/2 flex justify-center">
                         Save
                         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="items-center fill-current w-4 h-4 mr-2 mt-1 ml-1"><path d="M20.94,11A8.26,8.26,0,0,1,21,12a9,9,0,1,1-9-9,8.83,8.83,0,0,1,4,1" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></path><polyline id="primary-2" data-name="primary" points="21 5 12 14 8 10" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></polyline></svg>
                     </button>
-                    <button class="w-1/2 flex justify-center">Cancel</button>
+                    <button id="cancelBtn" type="reset" class="w-1/2 flex justify-center">Cancel</button>
                 </div>
             </form>
         </div>
@@ -158,7 +158,7 @@
                 <label for="locationName">Name</label>
                 <input type="text" value="Reinhardtstraße" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
                 
-                <label for="discription">Discription</label>              
+                <label for="description">Description</label>              
                 <input type="text" value="Angrenzend der Kronprinzbrücke sorgt der Straßenverkehr für hohe Luftbelastung" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
                 
                 <label for="locationAdress">Address</label>
@@ -217,8 +217,8 @@
                 </div>
                 <div class="flex justify-between w-full">
                     <button class="bg-transparent hover:bg-blue-200 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded w-1/4 flex justify-center">Update</button>
-                    <button class="bg-transparent hover:bg-red-400 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded w-1/4 flex justify-center">Delete</button>
-                    <button class="w-1/4 flex justify-center">Cancel</button>
+                    <button type="reset" class="bg-transparent hover:bg-red-400 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded w-1/4 flex justify-center">Delete</button>
+                    <button type="reset" class="w-1/4 flex justify-center">Cancel</button>
                 </div>
             </form>
         </div>
