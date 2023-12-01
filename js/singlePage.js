@@ -117,6 +117,7 @@ function addLocationToMap(location) {
 
     const locationsList = document.getElementById('locations-list');
     const listItem = document.createElement('li');
+    listItem.id = location.name + "_li";
     listItem.innerHTML = `<Button id="${location.name} class="hover:text-gray-600" >${location.name}: <br> ${location.address}, <br> ${location.zip} ${location.city} </Button>`;
     listItem.addEventListener('click', () => {
         hideAllDivsAndShow(UPDATE_DELETE_SCREEN, location);
@@ -124,8 +125,9 @@ function addLocationToMap(location) {
     locationsList.appendChild(listItem);
 
     let marker = L.marker([location.lat, location.lon]).addTo(map);
-    marker.bindPopup(location.name)
+    let maker = marker.bindPopup(location.name)
     map.setView([location.lat, location.lon]);
+    location.marker = marker;
 }
 
 function checkLogin(e) {
@@ -264,7 +266,16 @@ async function updateBtnClicked(e) {
 function deleteBtnClicked(e) {
     e.preventDefault();
     let locationName = document.getElementById("locationName2").value;
+    let locationsList = document.getElementById("locations-list");
     let location = locations.find(location => location.name === locationName);
     deleteLocation(location);
+    const listItemToRemove = document.getElementById(location.name + "_li");
+    if (listItemToRemove) {
+        locationsList.removeChild(listItemToRemove);
+    } else {
+        console.log("Element nicht gefunden");
+    }
+    let marker = location.marker;
+    map.removeLayer(marker);
     hideAllDivsAndShow(MAIN_SCREEN);
 }

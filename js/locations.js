@@ -10,7 +10,8 @@ const templateLocation = {
     state: null,
     lat: 0.0,
     lon: 0.0,
-    severity: 0
+    severity: 0,
+    marker: null
 }
 
 const locReinhardtstraße = {
@@ -22,7 +23,8 @@ const locReinhardtstraße = {
     state: "Berlin",
     lat: 52.51869218853665,
     lon: 13.376147888081254,
-    severity: 1
+    severity: 1,
+    marker: null
 };
 
 const locHKWMoabit = {
@@ -34,7 +36,8 @@ const locHKWMoabit = {
     state: "Berlin",
     lat: 52.5380092,
     lon: 13.3445253,
-    severity: 3
+    severity: 3,
+    marker: null
 }
 
 const locTeslaGF = {
@@ -46,7 +49,8 @@ const locTeslaGF = {
     state: "Brandenburg",
     lat: 52.3932851,
     lon: 13.7875301,
-    severity: 3
+    severity: 3,
+    marker: null
 }
 
 function addLocationToList(location) {
@@ -54,18 +58,8 @@ function addLocationToList(location) {
 }
 
 function deleteLocation(itemToRemove) {
-    console.log("before delete")
-    //console.log(locations);
-    for (let location of locations) {
-        console.log(location);
-    }
     let index = locations.indexOf(itemToRemove);
     locations.splice(index, 1);
-    console.log("after delete");
-    //console.log(locations);
-    for (let location of locations) {
-        console.log(location);
-    }
 }
 
 // a list with all locations
