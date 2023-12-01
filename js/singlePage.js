@@ -133,7 +133,7 @@ function cancelBtnClicked() {
     hideAllDivsAndShow(MAIN_SCREEN);
 }
 
-function saveBtnClicked(e) {
+    function saveBtnClicked(e) {
     e.preventDefault();
 
     let newLocation = {
@@ -150,25 +150,27 @@ function saveBtnClicked(e) {
 
     if (newLocation.lat === "" || newLocation.lon === "") {
         // add location to map by adress
-        let addressUnavailable = false;
-
         let url = `https://nominatim.openstreetmap.org/search?format=json&q=${newLocation.address}, ${newLocation.zip} ${newLocation.city}, ${newLocation.state}`;
-        fetch(url)
+        let addressAvailable = fetch(url)
             .then(response => response.json())
             .then(data => {
-                if (data.length === 0) {
-                    addressUnavailable = true;
-                    return;
+                console.log(data.length);
+                if (data.length == 0) {
+                    return false;
                 }
+                console.log("Available");
 
                 newLocation.lat = data[0].lat;
                 newLocation.lon = data[0].lon;
+                return true;
             });
 
-        if (addressUnavailable) {
+        if (!addressAvailable.value) {
             alert("Invalid adress.");
             return;
         }
+
+        console.log(addressAvailable.value);
     }
 
     addLocationToList(newLocation);
