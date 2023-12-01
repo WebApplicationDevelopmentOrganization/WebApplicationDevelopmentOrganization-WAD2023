@@ -1,4 +1,5 @@
-export { locations, addLocationToList };
+export { locations, addLocationToList, deleteLocation};
+import { hideAllDivsAndShow, UPDATE_DELETE_SCREEN, addLocationToMap } from "./singlePage.js";
 
 const templateLocation = {
     name: null,
@@ -21,7 +22,7 @@ const locReinhardtstraße = {
     state: "Berlin",
     lat: 52.51869218853665,
     lon: 13.376147888081254,
-    severity: 3
+    severity: 1
 };
 
 const locHKWMoabit = {
@@ -49,11 +50,23 @@ const locTeslaGF = {
 }
 
 function addLocationToList(location) {
-    const locationsList = document.getElementById('locations-list');
-    const listItem = document.createElement('li');
-    listItem.innerHTML = `${location.name}: <br> ${location.address}, <br> ${location.zip} ${location.city}`;
-    locationsList.appendChild(listItem);
+    locations.push(location);
+}
+
+function deleteLocation(itemToRemove) {
+    console.log("before delete")
+    //console.log(locations);
+    for (let location of locations) {
+        console.log(location);
+    }
+    let index = locations.indexOf(itemToRemove);
+    locations.splice(index, 1);
+    console.log("after delete");
+    //console.log(locations);
+    for (let location of locations) {
+        console.log(location);
+    }
 }
 
 // a list with all locations
-const locations = [locReinhardtstraße, locHKWMoabit, locTeslaGF];
+let locations = [locReinhardtstraße, locHKWMoabit, locTeslaGF];

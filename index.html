@@ -154,70 +154,70 @@
             <form action="post" class="bg-white rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl px-8 pt-6 pb-8 mb-4">
                 <h3 class="mb-4 text-2xl">Update/Delete Location</h3>
     
-                <label for="locationName">Name</label>
-                <input type="text" value="Reinhardtstraße" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                <label for="locationName2">Name</label>
+                <input id="locationName2" type="text" value="Reinhardtstraße" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
                 
-                <label for="description">Description</label>              
-                <input type="text" value="Angrenzend der Kronprinzbrücke sorgt der Straßenverkehr für hohe Luftbelastung" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                <label for="description2">Description</label>              
+                <input id="description2" type="text" value="Angrenzend der Kronprinzbrücke sorgt der Straßenverkehr für hohe Luftbelastung" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
                 
-                <label for="locationAdress">Address</label>
-                <input type="text" value="Reinhardtstraße" required autocomplete="street-address" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                <label for="locationAdress2">Address</label>
+                <input id="locationAdress2" type="text" value="Reinhardtstraße" required autocomplete="street-address" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
                 <div class="flex">
                     <div class="w-1/2">
-                        <label for="city">City</label>
-                        <input type="text" value="Berlin" disabled required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">    
+                        <label for="city2">City</label>
+                        <input id="city2" type="text" value="Berlin" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">    
                     </div>
                     <div class="w-1/2 mx-4">
-                        <label for="locationAdress">ZIP code</label>
-                        <input type="number" value="10117" required autocomplete="postal-code" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5"> 
+                        <label for="zipCode2">ZIP code</label>
+                        <input id="zipCode2" type="number" value="10117" required autocomplete="postal-code" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5"> 
                     </div>
                 </div>
                 <div class="py-2">
-                    <label for="state">State</label>
+                    <label for="state2">State</label>
                     <div class="w-full px-3">
                         <div>
-                            <input checked type="radio" name="state" id="updateBer">
-                            <label for="updateBer">Berlin</label>
+                            <input id="ber2" required type="radio" name="state">
+                            <label for="ber2">Berlin</label>
                         </div>
                         <div>
-                            <input required type="radio" name="state" id="updateBurg">
-                            <label for="updateBurg">Brandenburg</label>
+                            <input id="burg2" required type="radio" name="state">
+                            <label for="burg2">Brandenburg</label>
                         </div>
                     </div>                    
                 </div>
                 <label for="cords">Coordinates</label>
                 <div id="cords" class="flex">
                     <div class="w-1/2">
-                        <label for="Lat">Lat</label>
-                        <input type="text" value="52.51869218853665" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">    
+                        <label for="lat2">Lat</label>
+                        <input id="lat2" type="text" value="52.51869218853665" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">    
                     </div>
                     <div class="w-1/2 mx-4">
-                        <label for="Long">Long</label>
-                        <input type="text" value="13.376147888081254" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5"> 
+                        <label for="lon2">Lon</label>
+                        <input id="lon2" type="text" value="13.376147888081254" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5"> 
                     </div>
                 </div>
                 
                 <label for="severityLevel">Severity Level</label>
                 <div id="severityLevel" class="flex space-x-4 my-5">
                     <label for="updateSeverityLvl1" class="block relative">
-                        <input type="radio" id="updateSeverityLvl1" name="severity" class="hidden" />
+                        <input id="updateSeverityLvl1" type="radio" id="updateSeverityLvl1" name="severity" class="hidden" />
                         <span class="custom-radio bg-yellow-300"></span>
                     </label>
                     
                     <label for="updateSeverityLvl2" class="block relative">
-                        <input type="radio" id="updateSeverityLvl2" name="severity" class="hidden" />
+                        <input id="updateSeverityLvl2" type="radio" id="updateSeverityLvl2" name="severity" class="hidden" />
                         <span class="custom-radio bg-orange-500"></span>
                     </label>
                     
                     <label for="updateSeverityLvl3" class="block relative">
-                        <input type="radio"checked id="updateSeverityLvl3" name="severity" class="hidden" />
+                        <input id="updateSeverityLvl3" type="radio"checked id="updateSeverityLvl3" name="severity" class="hidden" />
                         <span class="custom-radio bg-red-600"></span>
                     </label>
                 </div>
                 <div class="flex justify-between w-full">
-                    <button class="bg-transparent hover:bg-blue-200 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded w-1/4 flex justify-center">Update</button>
-                    <button type="reset" class="bg-transparent hover:bg-red-400 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded w-1/4 flex justify-center">Delete</button>
-                    <button type="reset" class="w-1/4 flex justify-center">Cancel</button>
+                    <button id="updateBtn" class="bg-transparent hover:bg-blue-200 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded w-1/4 flex justify-center">Update</button>
+                    <button id="deleteBtn" type="reset" class="bg-transparent hover:bg-red-400 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded w-1/4 flex justify-center">Delete</button>
+                    <button id="cancelBtn2" type="reset" class="w-1/4 flex justify-center">Cancel</button>
                 </div>
             </form>
         </div>
