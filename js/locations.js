@@ -1,4 +1,4 @@
-export { locations, addLocationToList, deleteLocation};
+export { getLocations, addLocationToList, removeLocationFromList };
 import { hideAllDivsAndShow, UPDATE_DELETE_SCREEN, addLocationToMap } from "./singlePage.js";
 
 const templateLocation = {
@@ -55,12 +55,32 @@ const locTeslaGF = {
 
 function addLocationToList(location) {
     locations.push(location);
+
+    const locationsList = document.getElementById('locations-list');
+    const listItem = document.createElement('li');
+    listItem.id = location.name + "_li";
+    listItem.innerHTML = `<Button id="${location.name} class="hover:text-gray-600" >${location.name}: <br> ${location.address}, <br> ${location.zip} ${location.city} </Button>`;
+    listItem.addEventListener('click', () => {
+        hideAllDivsAndShow(UPDATE_DELETE_SCREEN, location);
+    });
+    locationsList.appendChild(listItem);
 }
 
-function deleteLocation(itemToRemove) {
-    let index = locations.indexOf(itemToRemove);
-    locations.splice(index, 1);
-}
-
-// a list with all locations
 let locations = [locReinhardtstraße, locHKWMoabit, locTeslaGF];
+
+function removeLocationFromList(location) {
+    let index = locations.indexOf(location);
+    locations.splice(index, 1);
+
+    const locationsList = document.getElementById("locations-list");
+    const listItemToRemove = document.getElementById(location.name + "_li");
+    if (listItemToRemove) {
+        locationsList.removeChild(listItemToRemove);
+    } else {
+        console.warn(`Element \"${location.name}\_li" not found.`);
+    }
+}
+
+function getLocations() {
+    return locations;
+}

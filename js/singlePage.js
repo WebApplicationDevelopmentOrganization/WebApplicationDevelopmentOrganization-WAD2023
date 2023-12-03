@@ -1,6 +1,6 @@
 import getUserByName from "./users.js";
 import { ROLE_ADMIN, ROLE_NORMAL } from "./users.js";
-import {locations, addLocationToList, deleteLocation } from "./locations.js";
+import { addLocationToList, removeLocationFromList, getLocations } from "./locations.js";
 
 export {UPDATE_DELETE_SCREEN, hideAllDivsAndShow, addLocationToMap}
 
@@ -11,6 +11,7 @@ const UPDATE_DELETE_SCREEN = "Update/Delete-Screen";
 
 let activeUser = null;
 let isUserLoggedIn = false;
+let inspectedLocation = null;
 
 const divs = document.querySelectorAll(".visibleDivClass");
 
@@ -49,7 +50,6 @@ function pageSetUp(id, arg=null) {
 }
 
 function setUpUpdateDeletePage(location) {
-    console.log(location);
     document.getElementById("locationName2").value = location.name;
     document.getElementById("description2").value = location.desc;
     document.getElementById("locationAdress2").value = location.address;
@@ -70,7 +70,8 @@ function setUpUpdateDeletePage(location) {
     } else {
         document.getElementById("ber2").checked = true;
     }
-    
+
+    inspectedLocation = location;
 }
 
 function setUpMainPage() {
@@ -110,22 +111,29 @@ function initMap() {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    locations.forEach(addLocationToMap);
+    getLocations().forEach(addLocation);
+
+}
+
+function addLocation(location) {
+    addLocationToList(location);
+    addLocationToMap(location);
+}
+
+function removeLocation(location) {
+    removeLocationFromList(location);
+    removeLocationFromMap(location);
+
+}
+
+function removeLocationFromMap(location) {
+    let marker = location.marker;
+    map.removeLayer(marker);
 }
 
 function addLocationToMap(location) {
-
-    const locationsList = document.getElementById('locations-list');
-    const listItem = document.createElement('li');
-    listItem.id = location.name + "_li";
-    listItem.innerHTML = `<Button id="${location.name} class="hover:text-gray-600" >${location.name}: <br> ${location.address}, <br> ${location.zip} ${location.city} </Button>`;
-    listItem.addEventListener('click', () => {
-        hideAllDivsAndShow(UPDATE_DELETE_SCREEN, location);
-    });
-    locationsList.appendChild(listItem);
-
     let marker = L.marker([location.lat, location.lon]).addTo(map);
-    let maker = marker.bindPopup(location.name)
+    marker.bindPopup(location.name);
     map.setView([location.lat, location.lon]);
     location.marker = marker;
 }
@@ -196,9 +204,7 @@ async function saveBtnClicked(e) {
         }
     }
 
-    addLocationToList(newLocation);
-    addLocationToMap(newLocation);
-
+    addLocation(newLocation);
     hideAllDivsAndShow(MAIN_SCREEN);
 }
 
@@ -208,6 +214,7 @@ async function setCoordinatesByAddress(newLocation) {
     try {
         let response = await fetch(url);
         let data = await response.json();
+
         if (data.length == 0) {
             return false;
         }
@@ -224,7 +231,7 @@ function getStateFromRadioBtn(action) {
     const berChecked = document.getElementById("ber" + action).checked;
     const burgChecked = document.getElementById("burg" + action).checked;
 
-    return berChecked ? "Berlin" : "Brandenburg";
+    return berChecked ? "Berlin" : burgChecked ? "Brandenburg" : "";
 }
 
 function getSeverityLevelFromRadioBtn(action) {
@@ -258,24 +265,18 @@ async function updateBtnClicked(e) {
         }
     }
 
-    // delete old  location
+    removeLocation(inspectedLocation);
+    addLocation(newLocation);
 
-
+    inspectedLocation = null;
+    hideAllDivsAndShow(MAIN_SCREEN);
 }
 
 function deleteBtnClicked(e) {
     e.preventDefault();
-    let locationName = document.getElementById("locationName2").value;
-    let locationsList = document.getElementById("locations-list");
-    let location = locations.find(location => location.name === locationName);
-    deleteLocation(location);
-    const listItemToRemove = document.getElementById(location.name + "_li");
-    if (listItemToRemove) {
-        locationsList.removeChild(listItemToRemove);
-    } else {
-        console.log("Element nicht gefunden");
-    }
-    let marker = location.marker;
-    map.removeLayer(marker);
+    
+    removeLocation(inspectedLocation);
+
+    inspectedLocation = null;
     hideAllDivsAndShow(MAIN_SCREEN);
 }
