@@ -79,6 +79,9 @@ function setUpUpdateDeletePage(location) {
     } else {
         disableChildren(form, false)
 
+        document.getElementById("updateLat").disabled = true;
+        document.getElementById("updateLon").disabled = true;
+
         updateBtn.style.display = "";
         deleteBtn.style.display = "";
     }
