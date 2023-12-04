@@ -1,4 +1,18 @@
+export { getLocations, addLocationToList, removeLocationFromList };
+import { hideAllDivsAndShow, UPDATE_DELETE_SCREEN, addLocationToMap } from "./singlePage.js";
 
+const templateLocation = {
+    name: null,
+    desc: null,
+    address: null,
+    city: null,
+    zip: null,
+    state: null,
+    lat: 0.0,
+    lon: 0.0,
+    severity: 0,
+    marker: null
+}
 
 const locReinhardtstraße = {
     name: "Reinhardtstraße",
@@ -7,9 +21,10 @@ const locReinhardtstraße = {
     city: "Berlin",
     zip: "10117", 
     state: "Berlin",
-    lat: 52.51869218853665,
-    lon: 13.376147888081254,
-    severity: 3
+    lat: 52.522092398319806,
+    lon: 13.376525533854272,
+    severity: 1,
+    marker: null
 };
 
 const locHKWMoabit = {
@@ -21,7 +36,8 @@ const locHKWMoabit = {
     state: "Berlin",
     lat: 52.5380092,
     lon: 13.3445253,
-    severity: 3
+    severity: 3,
+    marker: null
 }
 
 const locTeslaGF = {
@@ -33,18 +49,45 @@ const locTeslaGF = {
     state: "Brandenburg",
     lat: 52.3932851,
     lon: 13.7875301,
-    severity: 3
+    severity: 3,
+    marker: null
 }
 
+const LOCATIONS_LIST = "locationsList";
+
 function addLocationToList(location) {
-    const locationsList = document.getElementById('locations-list');
+    locations.push(location);
+
+    const locationsList = document.getElementById(LOCATIONS_LIST);
     const listItem = document.createElement('li');
-    listItem.innerHTML = `${location.name}: <br> ${location.address}, <br> ${location.zip} ${location.city}`;
+    listItem.id = location.name + "_li";
+    listItem.style.textAlign = 'center';
+    listItem.style.display = 'flex';
+    listItem.style.flexDirection = 'column';
+    listItem.style.alignItems = 'center';
+    listItem.style.justifyContent = 'center';
+    listItem.innerHTML = `<Button id="${location.name}" class="hover:text-gray-400 text-center" >${location.name}: <br> ${location.address}, <br> ${location.zip} ${location.city} </Button>`;
+    listItem.addEventListener('click', () => {
+        hideAllDivsAndShow(UPDATE_DELETE_SCREEN, location);
+    });
     locationsList.appendChild(listItem);
 }
 
-// a list with all locations
-const locations = [locReinhardtstraße, locHKWMoabit, locTeslaGF];
+let locations = [locReinhardtstraße, locHKWMoabit, locTeslaGF];
 
-export { locations, addLocationToList };
+function removeLocationFromList(location) {
+    let index = locations.indexOf(location);
+    locations.splice(index, 1);
 
+    const locationsList = document.getElementById(LOCATIONS_LIST);
+    const listItemToRemove = document.getElementById(location.name + "_li");
+    if (listItemToRemove) {
+        locationsList.removeChild(listItemToRemove);
+    } else {
+        console.warn(`Element \"${location.name}\_li" not found.`);
+    }
+}
+
+function getLocations() {
+    return locations;
+}
