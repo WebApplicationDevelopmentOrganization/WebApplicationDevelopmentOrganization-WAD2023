@@ -61,7 +61,12 @@ function addLocationToList(location) {
     const locationsList = document.getElementById(LOCATIONS_LIST);
     const listItem = document.createElement('li');
     listItem.id = location.name + "_li";
-    listItem.innerHTML = `<Button id="${location.name}" class="hover:text-gray-600" >${location.name}: <br> ${location.address}, <br> ${location.zip} ${location.city} </Button>`;
+    listItem.style.textAlign = 'center';
+    listItem.style.display = 'flex';
+    listItem.style.flexDirection = 'column';
+    listItem.style.alignItems = 'center';
+    listItem.style.justifyContent = 'center';
+    listItem.innerHTML = `<Button id="${location.name}" class="hover:text-gray-400 text-center" >${location.name}: <br> ${location.address}, <br> ${location.zip} ${location.city} </Button>`;
     listItem.addEventListener('click', () => {
         hideAllDivsAndShow(UPDATE_DELETE_SCREEN, location);
     });
