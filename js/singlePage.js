@@ -224,8 +224,6 @@ async function saveBtnClicked(e) {
         city: document.getElementById("city").value,
         zip: document.getElementById("zipCode").value,
         state: getStateFromRadioBtn("ber", "burg"),
-        lat: document.getElementById("lat").value,
-        lon: document.getElementById("lon").value,
         severity: getSeverityLevelFromRadioBtn("severityLvl1", "severityLvl2", "severityLvl3")
     }
 
@@ -283,8 +281,6 @@ async function updateBtnClicked(e) {
         city: document.getElementById("updateCity").value,
         zip: document.getElementById("updateZipCode").value,
         state: getStateFromRadioBtn("updateBer", "updateBurg"),
-        lat: document.getElementById("updateLat").value,
-        lon: document.getElementById("updateLon").value,
         severity: getSeverityLevelFromRadioBtn("updateSeverityLvl1", "updateSeverityLvl2", "updateSeverityLvl3")
     }
 
