@@ -17,9 +17,9 @@
 <body class="g-white bg-slate-700 rounded-lg px-6 py-6 ring-1 ring-slate-900/5 shadow-xl text-sky-400">
 
     <!--Login screen-->
-    <div id="Login-Screen" class="visibleDivClass rounded-lg ring-1 ring-slate-900/5 shadow-xl bg-slate-800 w-full h-screen flex justify-between py-10 items-center">
+    <div id="loginScreen" class="visibleDivClass rounded-lg ring-1 ring-slate-900/5 shadow-xl bg-slate-800 w-full h-screen flex justify-between py-10 items-center">
         <div class="w-1/2 flex justify-center h-fit">
-            <form id="Login-Form" action="post" class="bg-white rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl px-8 pt-6 pb-8 mb-4">
+            <form id="loginForm" action="post" class="bg-white rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl px-8 pt-6 pb-8 mb-4">
                 <h3 class="mb-4 text-2xl">Sign in</h3>
     
                 <label for="username">Username</label>
@@ -41,14 +41,14 @@
                     class="shadow appearance-none border rounded w-full py-2 px-3 my-5 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
                 
-                <button type="submit" id="Login-Button" class="bg-transparent hover:bg-blue-200 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded">Login</button>
+                <button type="submit" id="loginBtn" class="bg-transparent hover:bg-blue-200 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded">Login</button>
             </form>
         </div>
         <h1 class="w-1/2 flex justify-center text-4xl">BoeBerBra</h1>
     </div>
 
     <!--Main screen with map-->
-    <div id="Main-Screen" class="visibleDivClass rounded-lg ring-1 ring-slate-900/5 shadow-xl bg-slate-800">
+    <div id="mainScreen" class="visibleDivClass rounded-lg ring-1 ring-slate-900/5 shadow-xl bg-slate-800">
         <div class="flex justify-between w-full py-8 px-8">
             <div class="flex justify-between  mb-18 font-semibold text-2xl">
                 <p>Welcome </p> <p id="usernameWelcomeMessage" class="px-2"></p>
@@ -57,7 +57,7 @@
         </div>
         
         <div class="grid grid-cols-12 py-5 px-10 my-5 items-center">
-            <ul id="locations-list" class="col-span-2 p-4 overflow-y-auto grid grid-cols-1 gap-5 content-center bg-slate-700 rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl h-fit">
+            <ul id="locationsList" class="col-span-2 p-4 overflow-y-auto grid grid-cols-1 gap-5 content-center bg-slate-700 rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl h-fit">
                 <!-- location  will be loaded here -->
             </ul>
           
@@ -70,31 +70,31 @@
     </div>
 
     <!--Add location screen-->
-    <div id="Add-Screen" class="visibleDivClass rounded-lg ring-1 ring-slate-900/5 shadow-xl bg-slate-800 w-full h-screen flex justify-center py-10 items-center">
+    <div id="addScreen" class="visibleDivClass rounded-lg ring-1 ring-slate-900/5 shadow-xl bg-slate-800 w-full h-screen flex justify-center py-10 items-center">
         <div class="w-fit flex justify-center h-fit">
-            <form action="post" class="bg-white rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl px-8 pt-6 pb-8 mb-4">
+            <form id="addForm" action="post" class="bg-white rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl px-8 pt-6 pb-8 mb-4">
                 <h3 class="mb-4 text-2xl">New Location</h3>
     
-                <label for="locationName">Name</label>
+                <label for="locationName">Name*</label>
                 <input id="locationName" type="text" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
                 
                 <label for="description">Description</label>              
-                <input id="description" type="text" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                <input id="description" type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
                 
-                <label for="locationAdress">Address</label>
+                <label for="locationAdress">Address*</label>
                 <input id="locationAdress" type="text" required autocomplete="street-address" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
                 <div class="flex">
                     <div class="w-1/2">
-                        <label for="city">City</label>
+                        <label for="city">City*</label>
                         <input id="city" type="text" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">    
                     </div>
                     <div class="w-1/2 mx-4">
-                        <label for="zipCode">ZIP code</label>
+                        <label for="zipCode">ZIP code*</label>
                         <input id="zipCode" type="number" required autocomplete="postal-code" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5"> 
                     </div>
                 </div>
                 <div class="py-2">
-                    <label for="state">State</label>
+                    <label for="state">State*</label>
                     <div class="w-full px-3">
                         <div>
                             <input id="ber" required type="radio" name="state">
@@ -138,7 +138,7 @@
                                  
                   
                 <div class="flex justify-between w-full">
-                    <button id="saveBtn" class="bg-transparent hover:bg-blue-200 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded w-1/2 flex justify-center">
+                    <button id="saveBtn" type="submit" class="bg-transparent hover:bg-blue-200 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded w-1/2 flex justify-center">
                         Save
                         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="items-center fill-current w-4 h-4 mr-2 mt-1 ml-1"><path d="M20.94,11A8.26,8.26,0,0,1,21,12a9,9,0,1,1-9-9,8.83,8.83,0,0,1,4,1" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></path><polyline id="primary-2" data-name="primary" points="21 5 12 14 8 10" style="fill: none; stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5;"></polyline></svg>
                     </button>
@@ -149,56 +149,56 @@
     </div>
     
     <!--Update/Selete screen-->
-    <div id="Update/Delete-Screen" class=" visibleDivClass rounded-lg ring-1 ring-slate-900/5 shadow-xl bg-slate-800 w-full h-screen flex justify-center py-10 items-center">
+    <div id="updateDeleteScreen" class=" visibleDivClass rounded-lg ring-1 ring-slate-900/5 shadow-xl bg-slate-800 w-full h-screen flex justify-center py-10 items-center">
         <div class="w-fit flex justify-center h-fit">
-            <form action="post" class="bg-white rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl px-8 pt-6 pb-8 mb-4">
+            <form id="updateDeleteForm" action="post" class="bg-white rounded-lg mx-10 ring-1 ring-slate-900/5 shadow-xl px-8 pt-6 pb-8 mb-4">
                 <h3 class="mb-4 text-2xl">Update/Delete Location</h3>
     
-                <label for="locationName2">Name</label>
-                <input id="locationName2" type="text" value="Reinhardtstraße" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                <label for="updateLocationName">Name*</label>
+                <input id="updateLocationName" type="text" value="Reinhardtstraße" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
                 
-                <label for="description2">Description</label>              
-                <input id="description2" type="text" value="Angrenzend der Kronprinzbrücke sorgt der Straßenverkehr für hohe Luftbelastung" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                <label for="updateDescription">Description</label>              
+                <input id="updateDescription" type="text" value="Angrenzend der Kronprinzbrücke sorgt der Straßenverkehr für hohe Luftbelastung" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
                 
-                <label for="locationAdress2">Address</label>
-                <input id="locationAdress2" type="text" value="Reinhardtstraße" required autocomplete="street-address" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
+                <label for="updateLocationAdress">Address*</label>
+                <input id="updateLocationAdress" type="text" value="Reinhardtstraße" required autocomplete="street-address" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">
                 <div class="flex">
                     <div class="w-1/2">
-                        <label for="city2">City</label>
-                        <input id="city2" type="text" value="Berlin" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">    
+                        <label for="updateCity">City*</label>
+                        <input id="updateCity" type="text" value="Berlin" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">    
                     </div>
                     <div class="w-1/2 mx-4">
-                        <label for="zipCode2">ZIP code</label>
-                        <input id="zipCode2" type="number" value="10117" required autocomplete="postal-code" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5"> 
+                        <label for="updateZipCode">ZIP code*</label>
+                        <input id="updateZipCode" type="number" value="10117" required autocomplete="postal-code" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5"> 
                     </div>
                 </div>
                 <div class="py-2">
-                    <label for="state2">State</label>
+                    <label for="state2">State*</label>
                     <div class="w-full px-3">
                         <div>
-                            <input id="ber2" required type="radio" name="state">
-                            <label for="ber2">Berlin</label>
+                            <input id="updateBer" required type="radio" name="state">
+                            <label for="updateBer">Berlin</label>
                         </div>
                         <div>
-                            <input id="burg2" required type="radio" name="state">
-                            <label for="burg2">Brandenburg</label>
+                            <input id="updateBurg" required type="radio" name="state">
+                            <label for="updateBurg">Brandenburg</label>
                         </div>
                     </div>                    
                 </div>
-                <label for="cords">Coordinates</label>
-                <div id="cords" class="flex">
+                <label for="updateCords">Coordinates</label>
+                <div id="updateCords" class="flex">
                     <div class="w-1/2">
-                        <label for="lat2">Lat</label>
-                        <input id="lat2" type="text" value="52.51869218853665" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">    
+                        <label for="updateLat">Lat</label>
+                        <input id="updateLat" type="text" value="52.51869218853665" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5">    
                     </div>
                     <div class="w-1/2 mx-4">
-                        <label for="lon2">Lon</label>
-                        <input id="lon2" type="text" value="13.376147888081254" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5"> 
+                        <label for="updateLon">Lon</label>
+                        <input id="updateLon" type="text" value="13.376147888081254" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline my-5"> 
                     </div>
                 </div>
                 
-                <label for="severityLevel">Severity Level</label>
-                <div id="severityLevel" class="flex space-x-4 my-5">
+                <label for="updateSeverityLevel">Severity Level</label>
+                <div id="updateSeverityLevel" class="flex space-x-4 my-5">
                     <label for="updateSeverityLvl1" class="block relative">
                         <input id="updateSeverityLvl1" type="radio" id="updateSeverityLvl1" name="severity" class="hidden" />
                         <span class="custom-radio bg-yellow-300"></span>
@@ -215,9 +215,9 @@
                     </label>
                 </div>
                 <div class="flex justify-between w-full">
-                    <button id="updateBtn" class="bg-transparent hover:bg-blue-200 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded w-1/4 flex justify-center">Update</button>
+                    <button id="updateBtn" type="submit" class="bg-transparent hover:bg-blue-200 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded w-1/4 flex justify-center">Update</button>
                     <button id="deleteBtn" type="reset" class="bg-transparent hover:bg-red-400 font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded w-1/4 flex justify-center">Delete</button>
-                    <button id="cancelBtn2" type="reset" class="w-1/4 flex justify-center">Cancel</button>
+                    <button id="updateCancelBtn" type="reset" class="w-1/4 flex justify-center">Cancel</button>
                 </div>
             </form>
         </div>
