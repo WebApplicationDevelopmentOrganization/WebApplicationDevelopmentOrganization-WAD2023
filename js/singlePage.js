@@ -4,10 +4,10 @@ import { addLocationToList, removeLocationFromList, getLocations } from "./locat
 
 export {UPDATE_DELETE_SCREEN, hideAllDivsAndShow, addLocationToMap}
 
-const LOGIN_SCREEN = "Login-Screen";
-const MAIN_SCREEN = "Main-Screen";
-const ADD_SCREEN = "Add-Screen";
-const UPDATE_DELETE_SCREEN = "Update/Delete-Screen";
+const LOGIN_SCREEN = "loginScreen";
+const MAIN_SCREEN = "mainScreen";
+const ADD_SCREEN = "addScreen";
+const UPDATE_DELETE_SCREEN = "updateDeleteScreen";
 
 let activeUser = null;
 let isUserLoggedIn = false;
@@ -49,14 +49,47 @@ function pageSetUp(id, arg=null) {
     }
 }
 
+function disableChildren(parent, isDisabled) {
+    let children = parent.children;
+
+    if (children.length == 0) {
+        return;
+    }
+
+    for (let i = 0; i < children.length; i++) {
+        disableChildren(children[i], isDisabled);
+        children[i].disabled = isDisabled;
+    }
+}
+
 function setUpUpdateDeletePage(location) {
-    document.getElementById("locationName2").value = location.name;
-    document.getElementById("description2").value = location.desc;
-    document.getElementById("locationAdress2").value = location.address;
-    document.getElementById("city2").value = location.city;
-    document.getElementById("zipCode2").value = location.zip;
-    document.getElementById("lat2").value = location.lat;
-    document.getElementById("lon2").value = location.lon;
+    let form = document.getElementById("updateDeleteForm");
+    let updateBtn = document.getElementById("updateBtn");
+    let deleteBtn = document.getElementById("deleteBtn");
+
+    if (activeUser.role !== ROLE_ADMIN) {
+        disableChildren(form, true);
+        let cancelBtn = document.getElementById("updateCancelBtn");
+        cancelBtn.disabled = false;
+        disableChildren(cancelBtn, false);
+
+        updateBtn.style.display = "none";
+        deleteBtn.style.display = "none";
+
+    } else {
+        disableChildren(form, false)
+
+        updateBtn.style.display = "";
+        deleteBtn.style.display = "";
+    }
+
+    document.getElementById("updateLocationName").value = location.name;
+    document.getElementById("updateDescription").value = location.desc;
+    document.getElementById("updateLocationAdress").value = location.address;
+    document.getElementById("updateCity").value = location.city;
+    document.getElementById("updateZipCode").value = location.zip;
+    document.getElementById("updateLat").value = location.lat;
+    document.getElementById("updateLon").value = location.lon;
     if (location.severity === 1) {
         document.getElementById("updateSeverityLvl1").checked = true;
     } else if (location.severity === 2) {
@@ -66,9 +99,9 @@ function setUpUpdateDeletePage(location) {
     }
 
     if (location.state === "Brandenburg") {
-        document.getElementById("burg2").checked = true;
+        document.getElementById("updateBurg").checked = true;
     } else {
-        document.getElementById("ber2").checked = true;
+        document.getElementById("updateBer").checked = true;
     }
 
     inspectedLocation = location;
@@ -92,13 +125,13 @@ window.addEventListener('load', function() {
 
 document.addEventListener("DOMContentLoaded", function() {
     initMap();
-    document.getElementById("Login-Form").onsubmit = checkLogin;
+    document.getElementById("loginForm").onsubmit = checkLogin;
     document.getElementById("logoutBtn").onclick = logout;
     document.getElementById("addBtn").onclick = addBtnClicked;
     document.getElementById("cancelBtn").onclick = cancelBtnClicked;
-    document.getElementById("cancelBtn2").onclick = cancelBtnClicked;
-    document.getElementById("saveBtn").onclick = saveBtnClicked;
-    document.getElementById("updateBtn").onclick = updateBtnClicked;
+    document.getElementById("updateCancelBtn").onclick = cancelBtnClicked;
+    document.getElementById("addForm").onsubmit = saveBtnClicked;
+    document.getElementById("updateDeleteForm").onsubmit = updateBtnClicked;
     document.getElementById("deleteBtn").onclick = deleteBtnClicked;
 });
 
@@ -190,18 +223,16 @@ async function saveBtnClicked(e) {
         address: document.getElementById("locationAdress").value,
         city: document.getElementById("city").value,
         zip: document.getElementById("zipCode").value,
-        state: getStateFromRadioBtn(""),
+        state: getStateFromRadioBtn("ber", "burg"),
         lat: document.getElementById("lat").value,
         lon: document.getElementById("lon").value,
-        severity: getSeverityLevelFromRadioBtn("s")
+        severity: getSeverityLevelFromRadioBtn("severityLvl1", "severityLvl2", "severityLvl3")
     }
 
-    if (newLocation.lat === "" || newLocation.lon === "") {
-        let locationAvailable = await setCoordinatesByAddress(newLocation);
-        if (!locationAvailable) {
-            alert("Invalid adress.");
-            return;
-        }
+    let locationAvailable = await setCoordinatesByAddress(newLocation);
+    if (!locationAvailable) {
+        alert("Invalid adress.");
+        return;
     }
 
     addLocation(newLocation);
@@ -227,42 +258,40 @@ async function setCoordinatesByAddress(newLocation) {
     }
 }
 
-function getStateFromRadioBtn(action) {
-    const berChecked = document.getElementById("ber" + action).checked;
-    const burgChecked = document.getElementById("burg" + action).checked;
+function getStateFromRadioBtn(idBerBtn, idBurgBtn) {
+    const berChecked = document.getElementById(idBerBtn).checked;
+    const burgChecked = document.getElementById(idBurgBtn).checked;
 
     return berChecked ? "Berlin" : burgChecked ? "Brandenburg" : "";
 }
 
-function getSeverityLevelFromRadioBtn(action) {
-    const lv1 = document.getElementById(action + "everityLvl1").checked;
-    const lv2 = document.getElementById(action + "everityLvl2").checked;
-    const lv3 = document.getElementById(action + "everityLvl3").checked;
+function getSeverityLevelFromRadioBtn(idLv1, idLv2, idLv3) {
+    const lv1 = document.getElementById(idLv1).checked;
+    const lv2 = document.getElementById(idLv2).checked;
+    const lv3 = document.getElementById(idLv3).checked;
 
-    return lv1 ? 1 : lv2 ? 2 : 3;
+    return lv1 ? 1 : lv2 ? 2 : lv3? 3 : 1;
 }
 
 async function updateBtnClicked(e) {
     e.preventDefault();
 
     let newLocation = {
-        name: document.getElementById("locationName2").value,
-        desc: document.getElementById("description2").value,
-        address: document.getElementById("locationAdress2").value,
-        city: document.getElementById("city2").value,
-        zip: document.getElementById("zipCode2").value,
-        state: getStateFromRadioBtn("2"),
-        lat: document.getElementById("lat2").value,
-        lon: document.getElementById("lon2").value,
-        severity: getSeverityLevelFromRadioBtn("updateS")
+        name: document.getElementById("updateLocationName").value,
+        desc: document.getElementById("updateDescription").value,
+        address: document.getElementById("updateLocationAdress").value,
+        city: document.getElementById("updateCity").value,
+        zip: document.getElementById("updateZipCode").value,
+        state: getStateFromRadioBtn("updateBer", "updateBurg"),
+        lat: document.getElementById("updateLat").value,
+        lon: document.getElementById("updateLon").value,
+        severity: getSeverityLevelFromRadioBtn("updateSeverityLvl1", "updateSeverityLvl2", "updateSeverityLvl3")
     }
 
-    if (newLocation.lat === "" || newLocation.lon === "") {
-        let locationAvailable = await setCoordinatesByAddress(newLocation);
-        if (!locationAvailable) {
-            alert("Invalid adress.");
-            return;
-        }
+    let locationAvailable = await setCoordinatesByAddress(newLocation);
+    if (!locationAvailable) {
+        alert("Invalid adress.");
+        return;
     }
 
     removeLocation(inspectedLocation);

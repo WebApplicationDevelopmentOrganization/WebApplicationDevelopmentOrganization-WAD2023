@@ -21,8 +21,8 @@ const locReinhardtstraße = {
     city: "Berlin",
     zip: "10117", 
     state: "Berlin",
-    lat: 52.51869218853665,
-    lon: 13.376147888081254,
+    lat: 52.522092398319806,
+    lon: 13.376525533854272,
     severity: 1,
     marker: null
 };
@@ -53,10 +53,12 @@ const locTeslaGF = {
     marker: null
 }
 
+const LOCATIONS_LIST = "locationsList";
+
 function addLocationToList(location) {
     locations.push(location);
 
-    const locationsList = document.getElementById('locations-list');
+    const locationsList = document.getElementById(LOCATIONS_LIST);
     const listItem = document.createElement('li');
     listItem.id = location.name + "_li";
     listItem.innerHTML = `<Button id="${location.name} class="hover:text-gray-600" >${location.name}: <br> ${location.address}, <br> ${location.zip} ${location.city} </Button>`;
@@ -72,7 +74,7 @@ function removeLocationFromList(location) {
     let index = locations.indexOf(location);
     locations.splice(index, 1);
 
-    const locationsList = document.getElementById("locations-list");
+    const locationsList = document.getElementById(LOCATIONS_LIST);
     const listItemToRemove = document.getElementById(location.name + "_li");
     if (listItemToRemove) {
         locationsList.removeChild(listItemToRemove);
