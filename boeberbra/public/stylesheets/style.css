@@ -1,0 +1,14 @@
+.custom-radio {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    border-radius: 8px; /* Less rounded corners */
+    cursor: pointer;
+}
+
+/* Style the checked state */
+input[type="radio"]:checked + .custom-radio {
+    border: 2px solid black; /* Black border when checked */
+    background-size: 50% 50%;
+    background-position: 50% 50%;
+}
