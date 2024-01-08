@@ -6,8 +6,7 @@ router.get('/', function(req, res, next) {
   res.render('boeberbra/public/index.html', { title: 'Express' });
 });
 
-router.post('/post', function(req, res, next) {
-  
+router.post('/', function(req, res, next) {
   res.render('boeberbra/public/index.html', { title: 'Express' });
 });
 
