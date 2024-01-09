@@ -68,7 +68,7 @@ function addLocationToList(location) {
     listItem.style.justifyContent = 'center';
     listItem.innerHTML = `<Button id="${location.name}" class="hover:text-gray-400 text-center" >${location.name}: <br> ${location.address}, <br> ${location.zip} ${location.city} </Button>`;
     listItem.addEventListener('click', () => {
-        hideAllDivsAndShow(UPDATE_DELETE_SCREEN, location);
+        hideAllDivsAndShow(UPDATE_DELETE_SCREEN, location._id);
     });
     locationsList.appendChild(listItem);
 }
