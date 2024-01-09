@@ -122,7 +122,7 @@ async function setUpUpdateDeletePage(locationID) {
         deleteBtn.style.display = "none";
 
     } else {
-        disableChildren(form, false)
+        disableChildren(form, false);
 
         document.getElementById("updateLat").disabled = true;
         document.getElementById("updateLon").disabled = true;
@@ -131,7 +131,7 @@ async function setUpUpdateDeletePage(locationID) {
         deleteBtn.style.display = "";
     }
 
-    const location = await getLocation(locationID)
+    const location = await getLocation(locationID);
 
     document.getElementById("updateLocationName").value = location.name;
     document.getElementById("updateDescription").value = location.desc;
@@ -171,14 +171,14 @@ async function getAllLocations() {
         });
 
         if (response.ok) {
-            return response.json()
+            return response.json();
         } else {
-            console.error("error fetching locations")
+            console.error("error fetching locations");
             return;
         }
     } catch (error) {
-        console.error("error fetching locations")
-        return
+        console.error("error fetching locations");
+        return;
     }
 }
 
@@ -212,21 +212,19 @@ async function addLocation(location) {
         });
 
         if (response.ok) {
-            let id = response.headers['location'];
-            console.log(id)
-            console.log(response.headers)
-            id = id.replace('/loc/', "")
-            location._id = id
+            let id = response.headers.get('location');
+            id = id.replace('/loc/', "");
+            location._id = id;
             addLocationToMap(location);
-            return true
+            return true;
         } else {
             alert("Location could not be added due to an error.");
-            return false
+            return false;
         }
     } catch (error) {
-        console.error(error)
-        console.error("error adding location")
-        return false
+        console.error(error);
+        console.error("error adding location");
+        return false;
     }
 }
 
@@ -237,22 +235,22 @@ async function removeLocation(locationID) {
         });
 
         if (response.ok) {
-            removeLocationFromMap(locationID)
-            return
+            removeLocationFromMap(locationID);
+            return true;
         } else {
             alert("Location could not be removed.");
-            return;
+            return false;
         }
     } catch (error) {
-        console.error("error removing location")
-        return;
+        console.error("error removing location");
+        return false;
     }
 }
 
 function removeLocationFromMap(locationID) {
-    let marker = markersDict.get(locationID)
+    let marker = markersDict.get(locationID);
     map.removeLayer(marker);
-    markersDict.delete(locationID)
+    markersDict.delete(locationID);
 
     const locationsList = document.getElementById(LOCATIONS_LIST);
     const listItemToRemove = document.getElementById(locationID + "_li");
@@ -266,7 +264,7 @@ function removeLocationFromMap(locationID) {
 function addLocationToMap(location) {
     let marker = L.marker([location.lat, location.lon]).addTo(map);
     marker.bindPopup(location.name);
-    markersDict.set(location._id, marker)
+    markersDict.set(location._id, marker);
 
     const locationsList = document.getElementById(LOCATIONS_LIST);
     const listItem = document.createElement('li');
@@ -292,7 +290,7 @@ async function checkLogin(e) {
     const postBody = JSON.stringify({
         "username": usernameEntered,
         "password": passwordEntered
-    })
+    });
 
     try {
         const response = await fetch("http://localhost:3000/users", {
@@ -314,7 +312,7 @@ async function checkLogin(e) {
             return;
         }
     } catch (error) {
-        console.error("error fetching users")
+        console.error("error fetching users");
         return;
     }
 }
@@ -345,7 +343,7 @@ async function saveBtnClicked(e) {
         zip: document.getElementById("zipCode").value,
         state: getStateFromRadioBtn("ber", "burg"),
         severity: getSeverityLevelFromRadioBtn("severityLvl1", "severityLvl2", "severityLvl3")
-    }
+    };
 
     let locationAvailable = await setCoordinatesByAddress(newLocation);
     if (!locationAvailable) {
@@ -355,6 +353,7 @@ async function saveBtnClicked(e) {
 
     let success = addLocation(newLocation);
     if (success) {
+        map.setView([newLocation.lat, newLocation.lon]);
         hideAllDivsAndShow(MAIN_SCREEN);
     }
 }
@@ -380,10 +379,10 @@ async function setCoordinatesByAddress(newLocation) {
 
 async function updateLocation(updatedLocation) {
     try {
-        const response = await fetch("http://localhost:3000/loc/" + locationID, {
+        const response = await fetch("http://localhost:3000/loc/" + inspectedLocationID, {
             method: "PUT",
             headers: {
-                accept: "application.json",
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(updatedLocation)
         });
@@ -391,12 +390,15 @@ async function updateLocation(updatedLocation) {
         if (response.ok) {
             removeLocationFromMap(inspectedLocationID);
             addLocationToMap(updatedLocation);
+            return true;
         } else {
-            console.error("location does not exist")
-            return;
+            console.error("location does not exist");
+            return false;
         }
     } catch (error) {
-        console.error("error fetching locations")
+        console.log(error);
+        console.error("error fetching locations");
+        return false;
     }
 }
 
@@ -404,6 +406,7 @@ async function updateBtnClicked(e) {
     e.preventDefault();
 
     let newLocation = {
+        _id: inspectedLocationID,
         name: document.getElementById("updateLocationName").value,
         desc: document.getElementById("updateDescription").value,
         address: document.getElementById("updateLocationAdress").value,
@@ -411,7 +414,7 @@ async function updateBtnClicked(e) {
         zip: document.getElementById("updateZipCode").value,
         state: getStateFromRadioBtn("updateBer", "updateBurg"),
         severity: getSeverityLevelFromRadioBtn("updateSeverityLvl1", "updateSeverityLvl2", "updateSeverityLvl3")
-    }
+    };
 
     let locationAvailable = await setCoordinatesByAddress(newLocation);
     if (!locationAvailable) {
@@ -419,19 +422,22 @@ async function updateBtnClicked(e) {
         return;
     }
 
-    await updateLocation(newLocation)
-
-    inspectedLocationID = null;
-    hideAllDivsAndShow(MAIN_SCREEN);
+    const success = await updateLocation(newLocation);
+    if (success) {
+        inspectedLocationID = null;
+        map.setView([newLocation.lat, newLocation.lon]);
+        hideAllDivsAndShow(MAIN_SCREEN);
+    }
 }
 
 async function deleteBtnClicked(e) {
     e.preventDefault();
     
-    await removeLocation(inspectedLocationID);
-
-    inspectedLocationID = null;
-    hideAllDivsAndShow(MAIN_SCREEN);
+    const success = await removeLocation(inspectedLocationID);
+    if (success) {
+        inspectedLocationID = null;
+        hideAllDivsAndShow(MAIN_SCREEN);
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////

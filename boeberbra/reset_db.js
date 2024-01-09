@@ -85,4 +85,4 @@ async function addDefaultValues() {
 
 
 //deleteAllCollections();
-addDefaultValues();
+//addDefaultValues();

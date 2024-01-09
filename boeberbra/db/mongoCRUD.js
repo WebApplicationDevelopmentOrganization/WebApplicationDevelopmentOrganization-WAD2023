@@ -92,6 +92,7 @@ async function updateLocation(location) {
         const db = client.db(db_name);
         const collection = db.collection(loc_collection);
         let id = new ObjectId(location._id)
+        delete location._id
         const query = {_id: id};
         const result = await collection.replaceOne(query, location);
         return result;
